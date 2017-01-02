@@ -6,6 +6,7 @@
 package modules;
 
 import crud.crud;
+//import static crud.crud.getOne;
 import form.textfield;
 
 /**
@@ -131,11 +132,13 @@ public class product_add extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(textfield.textFieldValidation(fieldName, "Product Name", "empty")&&textfield.textFieldValidation(fieldPrice, "Product Price", "empty")){
 //            String suplier_code = comboSuplier.getSelectedItem().toString();
-            String suplier_id = comboSuplier.getSelectedItem().toString();
+            String suplier_code = comboSuplier.getSelectedItem().toString();
 //            int suplier_id = crud.show("select id from suplier where code = "+suplier_code);
-            suplier_id = suplier_id.split(" -")[0];
+            suplier_code = suplier_code.split(" -")[0];
             String field = "suplier_id,name,price,stock";
+            int suplier_id = Integer.parseInt(crud.getOne("SELECT id FROM suplier WHERE code = '"+suplier_code+"'"));
             String value = "'"+suplier_id+"', '"+this.fieldName.getText()+"', '"+this.fieldPrice.getText()+"', '"+this.spinnerStock.getValue()+"'";
+            
             crud.addData("product", field, value);
             crud.auto_code("product", "PRO", 5);
             if(crud.getSuccess()){

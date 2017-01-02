@@ -8,7 +8,9 @@ import config.config;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -107,7 +109,7 @@ public class crud {
         getResultset();
     }
 
-    public static String getOne(String query){
+    public String getOne(String query){
         String output = "";
         ResultSet rs;
         try{
@@ -212,7 +214,7 @@ public class crud {
             while(rs.next()){
                 Object[] datarow = new Object[indexlength];
                 for(int i=0;i<indexlength;i++){
-                    datarow[i] = rs.getString(metaData.getColumnName(i+1));
+                    datarow[i] = rs.getString(metaData.getColumnLabel(i+1));
                 }
                 model.addRow(datarow);
                 isexist = rs.getString(1);
