@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/felismelo/NetBeansProjects/jmaster/src/modules/user_list.java</file>
+            <file>file:/home/felismelo/NetBeansProjects/jmaster/src/modules/detail.java</file>
             <file>file:/home/felismelo/NetBeansProjects/jmaster/src/crud/crud.java</file>
             <file>file:/home/felismelo/NetBeansProjects/jmaster/src/modules/product_add.java</file>
             <file>file:/home/felismelo/NetBeansProjects/jmaster/src/modules/suplier_add.java</file>
+            <file>file:/home/felismelo/NetBeansProjects/jmaster/src/modules/suplier_list.java</file>
+            <file>file:/home/felismelo/NetBeansProjects/jmaster/src/form/layout.java</file>
             <file>file:/home/felismelo/NetBeansProjects/jmaster/src/config/test.java</file>
             <file>file:/home/felismelo/NetBeansProjects/jmaster/src/modules/product_list.java</file>
+            <file>file:/home/felismelo/NetBeansProjects/jmaster/src/modules/user_add.java</file>
         </group>
     </open-files>
 </project-private>

@@ -19,40 +19,40 @@ public class test {
     private DefaultTableModel model;
     
     
-    public void show(){
-        config connect = new config();
-        ResultSet rs;
-        String data[] = new String[]{"username","password"};
-        StringBuilder field = new StringBuilder();
-        int datalength = data.length;
-        for(int i=0;i<datalength;i++){
-            field.append(data[i]);
-            if(i<datalength-1){
-                field.append(",");
-            }
-            
-        }
-        
-        
-        model.getDataVector().removeAllElements();
-        model.fireTableDataChanged();
-        int i = 0;
-        try{
-            String word = field.toString();
-            System.out.print(word);
-            rs = connect.show("SELECT "+word+" FROM user");
-            while(rs.next()){
-                Object[] o = new Object[datalength];
-                for(int j=0;j<data.length;j++){
-                    o[j] = rs.getString(data[j]);
-                    System.out.println(o[j]);
-                }
-                model.addRow(o);
-            }
-        }catch(SQLException e){
-            System.out.println(e);
-        }        
-    }
+//    public void show(){
+//        config connect = new config();
+//        ResultSet rs;
+//        String data[] = new String[]{"username","password"};
+//        StringBuilder field = new StringBuilder();
+//        int datalength = data.length;
+//        for(int i=0;i<datalength;i++){
+//            field.append(data[i]);
+//            if(i<datalength-1){
+//                field.append(",");
+//            }
+//            
+//        }
+//        
+//        
+//        model.getDataVector().removeAllElements();
+//        model.fireTableDataChanged();
+//        int i = 0;
+//        try{
+//            String word = field.toString();
+//            System.out.print(word);
+//            rs = connect.show("SELECT "+word+" FROM user");
+//            while(rs.next()){
+//                Object[] o = new Object[datalength];
+//                for(int j=0;j<data.length;j++){
+//                    o[j] = rs.getString(data[j]);
+//                    System.out.println(o[j]);
+//                }
+//                model.addRow(o);
+//            }
+//        }catch(SQLException e){
+//            System.out.println(e);
+//        }        
+//    }
 
     public static void main(String[]args){
 //        test t = new test();
@@ -90,22 +90,26 @@ public class test {
 //        String data = crud.getOne("select name,id from suplier ");
 //        System.out.println(data);
 
-        ResultSet rs;
-        ResultSetMetaData metaData;
-        config c = new config();
-        rs = c.show("select * from user");
-        try{
-            metaData = rs.getMetaData();
-            int z = metaData.getColumnCount();
-            System.out.println(z);
-            int i = 1;
-            while(rs.next()){
-                System.out.println(metaData.getColumnName(i));
-                i++;
-            }
-        }catch(Exception e){
-            
-        }
+//        ResultSet rs;
+//        ResultSetMetaData metaData;
+//        config c = new config();
+//        rs = c.show("select * from user");
+//        try{
+//            metaData = rs.getMetaData();
+//            int z = metaData.getColumnCount();
+//            System.out.println(z);
+//            int i = 1;
+//            while(rs.next()){
+//                System.out.println(metaData.getColumnName(i));
+//                i++;
+//            }
+//        }catch(Exception e){
+//            
+//        }
+        int a = 35;
+        int b = 10;
+        int c = (int) Math.ceil(a/b);
+        System.out.println(c);
     }
 
 }
