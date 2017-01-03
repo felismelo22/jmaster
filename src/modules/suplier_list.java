@@ -18,20 +18,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author felismelo
  */
-public class product_list extends javax.swing.JFrame {
+public class suplier_list extends javax.swing.JFrame {
     config connect = new config();
     crud crud = new crud();
     layout layout = new layout();
     int limit = 16;
-    
+
     /**
      * Creates new form product_list
      */
-    public product_list() {
+    public suplier_list() {
         initComponents();
         this.setLocationRelativeTo(null);
-        crud.tableData(jTable1, "product AS p LEFT JOIN suplier AS s ON(p.suplier_id=s.id)", "p.code,p.name AS product_name,p.price,p.stock,s.name", "ORDER BY p.id DESC LIMIT 0,"+limit);
-        String total = crud.getOne("SELECT count(id) FROM product");
+        crud.tableData(jTable1, "suplier", "code,name,phone", "ORDER BY id DESC LIMIT 0,"+limit);
+        String total = crud.getOne("SELECT count(id) FROM suplier");
         double totalData = Double.parseDouble(total);
         int totPage = (int) Math.ceil(totalData/limit);
         total = String.valueOf(totPage);
@@ -72,6 +72,19 @@ public class product_list extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTable1MouseEntered(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("< previous");
@@ -123,17 +136,20 @@ public class product_list extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(page)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalPage)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(212, 212, 212)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(page)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(totalPage))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -144,7 +160,7 @@ public class product_list extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -155,7 +171,7 @@ public class product_list extends javax.swing.JFrame {
                     .addComponent(totalPage)
                     .addComponent(jButton3)
                     .addComponent(gotoPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -166,7 +182,7 @@ public class product_list extends javax.swing.JFrame {
         int curentPage = Integer.parseInt(page.getText());
         int labelPage = curentPage;
         curentPage = (limit*curentPage);
-        crud.tableData(jTable1,"product AS p LEFT JOIN suplier AS s ON(p.suplier_id=s.id)", "p.code,p.name AS product_name,p.price,p.stock,s.name", "ORDER BY p.id DESC LIMIT "+curentPage+","+limit);
+        crud.tableData(jTable1, "suplier", "code,name,phone", "ORDER BY id DESC LIMIT "+curentPage+","+limit);
         labelPage++;
         page.setText(String.valueOf(labelPage));
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -178,7 +194,7 @@ public class product_list extends javax.swing.JFrame {
         int labelPage = curentPage;
         curentPage = curentPage-1;
         curentPage = (limit*curentPage);
-        crud.tableData(jTable1,"product AS p LEFT JOIN suplier AS s ON(p.suplier_id=s.id)", "p.code,p.name AS product_name,p.price,p.stock,s.name", "ORDER BY p.id DESC LIMIT "+curentPage+","+limit);
+        crud.tableData(jTable1, "suplier", "code,name,phone", "ORDER BY id DESC LIMIT "+curentPage+","+limit);
         page.setText(String.valueOf(labelPage));        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -199,7 +215,7 @@ public class product_list extends javax.swing.JFrame {
             int curentPage = gopage;
             int labelPage = curentPage;
             curentPage = (limit*curentPage);
-            crud.tableData(jTable1,"product AS p LEFT JOIN suplier AS s ON(p.suplier_id=s.id)", "p.code,p.name AS product_name,p.price,p.stock,s.name", "ORDER BY p.id DESC LIMIT "+curentPage+","+limit);
+            crud.tableData(jTable1, "suplier", "code,name,phone", "ORDER BY id DESC LIMIT "+curentPage+","+limit);
             page.setText(String.valueOf(labelPage));            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -209,6 +225,22 @@ public class product_list extends javax.swing.JFrame {
         textfield textfield = new textfield();
         textfield.isNumeric(gotoPage);
     }//GEN-LAST:event_gotoPageKeyReleased
+
+    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+        // TODO add your handling code here:
+        jTable1.setToolTipText("Click for see Detail");
+    }//GEN-LAST:event_jTable1MouseEntered
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        String code = jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
+        JOptionPane.showMessageDialog(null, code);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "cant edit data here");
+    }//GEN-LAST:event_jTable1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -227,20 +259,21 @@ public class product_list extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(product_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(suplier_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(product_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(suplier_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(product_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(suplier_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(product_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(suplier_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new product_list().setVisible(true);
+                new suplier_list().setVisible(true);
             }
         });
     }
