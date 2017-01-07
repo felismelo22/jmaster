@@ -198,6 +198,7 @@ public class user_list extends javax.swing.JFrame {
         }else{
             int curentPage = gopage;
             int labelPage = curentPage;
+            curentPage = curentPage-1;
             curentPage = (limit*curentPage);
             crud.tableData(jTable1, "user", "username,password", "ORDER BY id DESC LIMIT "+curentPage+","+limit);
             page.setText(String.valueOf(labelPage));            

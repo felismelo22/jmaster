@@ -106,10 +106,10 @@ public class test {
 //        }catch(Exception e){
 //            
 //        }
-        int a = 35;
-        int b = 10;
-        int c = (int) Math.ceil(a/b);
-        System.out.println(c);
+//        int a = 35;
+//        int b = 10;
+//        int c = (int) Math.ceil(a/b);
+//        System.out.println(c);
     }
 
 }

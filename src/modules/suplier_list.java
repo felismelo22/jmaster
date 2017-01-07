@@ -214,6 +214,7 @@ public class suplier_list extends javax.swing.JFrame {
         }else{
             int curentPage = gopage;
             int labelPage = curentPage;
+            curentPage = curentPage-1;
             curentPage = (limit*curentPage);
             crud.tableData(jTable1, "suplier", "code,name,phone", "ORDER BY id DESC LIMIT "+curentPage+","+limit);
             page.setText(String.valueOf(labelPage));            
@@ -234,7 +235,11 @@ public class suplier_list extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         String code = jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
-        JOptionPane.showMessageDialog(null, code);
+        crud.setId(code);
+        crud.setTitle("suplier");
+        detail detail = new detail();
+        detail.show();
+//        detail.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed

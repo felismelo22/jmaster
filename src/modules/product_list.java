@@ -72,6 +72,11 @@ public class product_list extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("< previous");
@@ -198,6 +203,7 @@ public class product_list extends javax.swing.JFrame {
         }else{
             int curentPage = gopage;
             int labelPage = curentPage;
+            curentPage = curentPage-1;
             curentPage = (limit*curentPage);
             crud.tableData(jTable1,"product AS p LEFT JOIN suplier AS s ON(p.suplier_id=s.id)", "p.code,p.name AS product_name,p.price,p.stock,s.name", "ORDER BY p.id DESC LIMIT "+curentPage+","+limit);
             page.setText(String.valueOf(labelPage));            
@@ -209,6 +215,15 @@ public class product_list extends javax.swing.JFrame {
         textfield textfield = new textfield();
         textfield.isNumeric(gotoPage);
     }//GEN-LAST:event_gotoPageKeyReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        String code = jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
+        crud.setId(code);
+        crud.setTitle("product");
+        detail detail = new detail();
+        detail.show();
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

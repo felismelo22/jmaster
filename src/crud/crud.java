@@ -29,6 +29,24 @@ public class crud {
     private String addsql;
     private ResultSet resultset;
     private DefaultTableModel model;
+    private static String id;
+    private static String title;
+
+    public static String getTitle() {
+        return title;
+    }
+
+    public static void setTitle(String title) {
+        crud.title = title;
+    }
+
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        crud.id = id;
+    }
     
     public boolean getSuccess(){
         return c.getSuccess();
@@ -229,6 +247,44 @@ public class crud {
             JOptionPane.showMessageDialog(null, e);
         }
     }    
+
+    public void detailData(JTable jtable, String table, String index, String condition){
+        ResultSet rs;
+        ResultSetMetaData metaData;
+        model = new DefaultTableModel();
+        condition = condition==null ? "LIMIT 1" : condition+" LIMIT 1";
+        if(index == null) index = "*";
+        rs = c.show("SELECT "+index+" FROM "+table+" "+condition);
+        String isexist = null;
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        jtable.setModel(model);
+
+        try{
+            metaData = rs.getMetaData();
+            int indexlength = metaData.getColumnCount();
+            model.addColumn("label");
+            model.addColumn("value");
+            while(rs.next()){
+                Object[] datarow = new Object[indexlength];
+                for(int i=0;i<indexlength;i++){
+                    for(int j=0;j<2;j++){
+                        datarow[0] = metaData.getColumnLabel(i+1);
+                        datarow[1] = rs.getString(metaData.getColumnLabel(i+1));
+                    }
+                    model.addRow(datarow);
+                }
+                isexist = rs.getString(1);
+            }
+            if(isexist == null){
+                System.out.println("gak ada");
+            }
+            rs.close();
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }        
     
     public int INSERT_ID(){
         int id = 0;
