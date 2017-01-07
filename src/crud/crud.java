@@ -8,9 +8,7 @@ import config.config;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -220,24 +218,24 @@ public class crud {
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
         jtable.setModel(model);
-
         try{
             metaData = rs.getMetaData();
             int indexlength = metaData.getColumnCount();
-            int j = 1;
+            boolean check = false;
             for(int i=0;i<indexlength;i++){
                 model.addColumn(metaData.getColumnLabel(i+1));
                 jtable.getColumnModel().getColumn(i).setPreferredWidth(200);
             }
             while(rs.next()){
                 Object[] datarow = new Object[indexlength];
+
                 for(int i=0;i<indexlength;i++){
                     datarow[i] = rs.getString(metaData.getColumnLabel(i+1));
                 }
                 model.addRow(datarow);
                 isexist = rs.getString(1);
-                j++;
             }
+
             if(isexist == null){
                 System.out.println("gak ada");
             }

@@ -9,6 +9,7 @@ import config.config;
 import crud.crud;
 import form.layout;
 import form.textfield;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -37,6 +38,8 @@ public class product_list extends javax.swing.JFrame {
         total = String.valueOf(totPage);
         totalPage.setText(total);
         layout.pagination(jButton1,jButton2,page,totalPage);
+        jTable1.setUpdateSelectionOnSort(false);
+
     }
 
     /**
@@ -71,8 +74,19 @@ public class product_list extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
@@ -218,12 +232,25 @@ public class product_list extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        String code = jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
-        crud.setId(code);
-        crud.setTitle("product");
-        detail detail = new detail();
-        detail.show();
+//        String code = jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
+//        crud.setId(code);
+//        crud.setTitle("product");
+//        detail detail = new detail();
+//        detail.show();
+        this.setFocusable(false);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 2){
+            String code = jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
+            this.setFocusable(false);
+            crud.setId(code);
+            crud.setTitle("product");
+            detail detail = new detail();
+            detail.show();
+        }
+    }//GEN-LAST:event_jTable1MousePressed
 
     /**
      * @param args the command line arguments
