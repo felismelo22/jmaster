@@ -47,12 +47,17 @@ public class product_add extends javax.swing.JFrame {
         comboSuplier = new javax.swing.JComboBox<>();
         saveButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        spinnerDiscount = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        fieldUnit = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Product Name");
+        jLabel1.setText("Nama Barang");
 
-        jLabel2.setText("Product Price");
+        jLabel2.setText("Harga Barang");
 
         fieldPrice.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -60,7 +65,7 @@ public class product_add extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Stock");
+        jLabel3.setText("Qty");
 
         spinnerStock.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -75,6 +80,14 @@ public class product_add extends javax.swing.JFrame {
 
         resetButton.setText("Reset");
 
+        jLabel5.setText("Diskon");
+
+        jLabel6.setText("%");
+
+        spinnerDiscount.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        jLabel7.setText("Satuan");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,6 +95,7 @@ public class product_add extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fieldUnit)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fieldName)
                     .addComponent(fieldPrice)
@@ -90,8 +104,14 @@ public class product_add extends javax.swing.JFrame {
                     .addComponent(comboSuplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(spinnerDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6))
                             .addComponent(jLabel3)
                             .addComponent(spinnerStock, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -111,9 +131,19 @@ public class product_add extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(spinnerDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spinnerStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -122,7 +152,7 @@ public class product_add extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(resetButton))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -130,19 +160,20 @@ public class product_add extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        if(textfield.textFieldValidation(fieldName, "Product Name", "empty")&&textfield.textFieldValidation(fieldPrice, "Product Price", "empty")){
+        if(textfield.textFieldValidation(fieldName, "Nama Barang", "empty")&&textfield.textFieldValidation(fieldPrice, "Harga Barang", "empty")&&textfield.textFieldValidation(fieldUnit, "Satuan Barang", "empty")){
 //            String suplier_code = comboSuplier.getSelectedItem().toString();
             String suplier_code = comboSuplier.getSelectedItem().toString();
 //            int suplier_id = crud.show("select id from suplier where code = "+suplier_code);
             suplier_code = suplier_code.split(" -")[0];
-            String field = "suplier_id,name,price,stock";
+            String field = "suplier_id,name,price,qty,unit,discount";
             int suplier_id = Integer.parseInt(crud.getOne("SELECT id FROM suplier WHERE code = '"+suplier_code+"'"));
-            String value = "'"+suplier_id+"', '"+this.fieldName.getText()+"', '"+this.fieldPrice.getText()+"', '"+this.spinnerStock.getValue()+"'";
+            String value = "'"+suplier_id+"', '"+this.fieldName.getText()+"', '"+this.fieldPrice.getText()+"', '"+this.spinnerStock.getValue()+"', '"+this.fieldUnit.getText()+"'";
             
             crud.addData("product", field, value);
             crud.auto_code("product", "PRO", 5);
             if(crud.getSuccess()){
-                
+                textfield.clear(fieldName,fieldPrice);
+                crud.alert("data berhasil disimpan");
             }
         }
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -191,12 +222,17 @@ public class product_add extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboSuplier;
     private javax.swing.JTextField fieldName;
     private javax.swing.JTextField fieldPrice;
+    private javax.swing.JTextField fieldUnit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton resetButton;
     private javax.swing.JButton saveButton;
+    private javax.swing.JSpinner spinnerDiscount;
     private javax.swing.JSpinner spinnerStock;
     // End of variables declaration//GEN-END:variables
 }

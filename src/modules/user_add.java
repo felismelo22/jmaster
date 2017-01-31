@@ -49,9 +49,9 @@ public class user_add extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Username");
+        jLabel1.setText("Nama Pengguna");
 
-        jLabel2.setText("Password");
+        jLabel2.setText("Sandi");
 
         jLabel3.setText("Level");
 
@@ -72,7 +72,7 @@ public class user_add extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Confirm Password");
+        jLabel4.setText("Ulang Sandi");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +92,7 @@ public class user_add extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(resetButton)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );

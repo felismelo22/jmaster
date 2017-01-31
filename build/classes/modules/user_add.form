@@ -37,7 +37,7 @@
                   <Group type="102" attributes="0">
                       <Component id="saveButton" min="-2" pref="72" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="resetButton" min="-2" pref="64" max="-2" attributes="0"/>
+                      <Component id="resetButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -77,12 +77,12 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Username"/>
+        <Property name="text" type="java.lang.String" value="Nama Pengguna"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Password"/>
+        <Property name="text" type="java.lang.String" value="Sandi"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="fieldUsername">
@@ -127,7 +127,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Confirm Password"/>
+        <Property name="text" type="java.lang.String" value="Ulang Sandi"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -320,4 +320,8 @@ public class crud {
         this.editData(table, "code = '"+code_value+"'", "WHERE id = "+current_id);
     }
     
+    public void alert(String text){
+        JOptionPane.showMessageDialog(null, text);
+    }
+    
 }

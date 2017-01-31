@@ -14,6 +14,13 @@ import javax.swing.JTextField;
  * @author felismelo
  */
 public class textfield {
+    
+    public void clear(JTextField... jtextfield){
+        for(JTextField arg : jtextfield){
+            arg.setText(null);
+        }
+    }
+    
     public boolean textFieldValidation(JTextField jtextfield, String fieldname, String kind){
         String text = jtextfield.getText();
         boolean success = false;
